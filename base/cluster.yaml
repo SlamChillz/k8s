@@ -1,0 +1,17 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+    name: rabbit-cluster
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: rabbitmq-compatible
+            operator: In
+            values:
+            - "true"
+  rabbitmq:
+    additionalConfig: |
+      consumer_timeout = 18000000
